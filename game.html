@@ -11,7 +11,7 @@
 
    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
    <meta name="author" content="Paul C. Laibach" />
-   <title>Project 5</title>
+   <title>Final Project - game v1.0</title>
 
    <!-- padding: top right bottom left; --> 
    <style type="text/css">
@@ -46,6 +46,12 @@
          text-align:center;
          border:none;
          resize:none;
+      }
+      textarea[name=taDebug] {
+         text-align:center;
+         border:none;
+         resize:none;
+         color: red;
       }
       input[type="button"] {
          background-color:green;
@@ -112,7 +118,8 @@
             <input type="button"
                    id="btnTxtCommand"
                    name="btnTxtCommand"
-                   value="Go" 
+                   value="Go"
+                   disabled="true"
                    onclick="simpleTextCommand();" />
             <br>
             <br>
@@ -140,12 +147,13 @@
          <td>
          </td>
          <td>
+            <!-- mailto: link to send you e-mail -->
+            <a href="mailto:cmpt120@laibach.net">Email comments or abuse to me</a>
+            <!-- Display currentLocale and localeVisits in debug textarea during developement. -->
+            <textarea id="taDebug" name="taDebug" cols="48" rows="1" readonly></textarea>
          </td>
       </tr>
    </table>
-
-   <!-- mailto: link to send you e-mail -->
-   <a href="mailto:cmpt120@laibach.net">Email comments or abuse to me</a>
 
 </body>
 

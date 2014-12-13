@@ -61,6 +61,8 @@
             resetTxtCommandPlaceHolder();
             focusOnTxtCommand();
             setBtnState();
+            // Display currentLocale and localeVisits in debug textarea during development.
+            updateDebugTextArea();
          }
 
       // Recursively concatenate (append) player actions and response messages for display in main history textarea.
@@ -74,10 +76,16 @@
             historyTextArea.scrollTop = historyTextArea.scrollHeight
          }
 
-      // Display current score and location in status textarea.
+      // Display totalScore and localeName in status textarea.
          function updateStatusTextArea() {
             var statusTextArea = document.getElementById("taStatus");
             statusTextArea.value = "Score: " + totalScore + "\n" + "Current Location: " + this.localeArray[currentLocale].localeName;
+         }
+
+      // Display currentLocale and localeVisits in debug textarea during developement.
+         function updateDebugTextArea() {
+            var debugTextArea = document.getElementById("taDebug");
+            debugTextArea.value = "[ currentLocale:" + currentLocale + " | localeVisits:" + this.localeArray[currentLocale].localeVisits + " ]";
          }
 
       // Since we are here, user text command input has either been evaluated and utilized, or discarded (and possibly dirty), so reset field to blank.
@@ -95,55 +103,27 @@
             document.getElementById("txtCommand").focus();
          }
 
-      // Set button status based upon relevant criteria
+      // Set button status using navArray navigational permissions array
          function setBtnState() {
-            if (currentLocale === "Room1") {
-               document.getElementById("btnWest").disabled = true;
-               document.getElementById("btnNorth").disabled = false;
-               document.getElementById("btnSouth").disabled = true;
-               document.getElementById("btnEast").disabled = true;
-            }  else {
-            if (currentLocale === "Room2") {
+            if (navArray[currentLocale][west] >=0) {
                document.getElementById("btnWest").disabled = false;
+            }  else {
+               document.getElementById("btnWest").disabled = true;
+               }
+            if (navArray[currentLocale][north] >=0) {
                document.getElementById("btnNorth").disabled = false;
-               document.getElementById("btnSouth").disabled = false;
-               document.getElementById("btnEast").disabled = true;
             }  else {
-            if (currentLocale === "Room3") {
-               document.getElementById("btnWest").disabled = true;
-               document.getElementById("btnNorth").disabled = false;
-               document.getElementById("btnSouth").disabled = false;
-               document.getElementById("btnEast").disabled = true;
-            }  else {
-            if (currentLocale === "Room4") {
-               document.getElementById("btnWest").disabled = true;
                document.getElementById("btnNorth").disabled = true;
-               document.getElementById("btnSouth").disabled = true;
-               document.getElementById("btnEast").disabled = true;
+               }
+            if (navArray[currentLocale][south] >=0) {
+               document.getElementById("btnSouth").disabled = false;
             }  else {
-            if (currentLocale === "Room5") {
-               document.getElementById("btnWest").disabled = true;
-               document.getElementById("btnNorth").disabled = true;
                document.getElementById("btnSouth").disabled = true;
+               }
+            if (navArray[currentLocale][east] >=0) {
                document.getElementById("btnEast").disabled = false;
             }  else {
-            if (currentLocale === "Room6") {
-               document.getElementById("btnWest").disabled = true;
-               document.getElementById("btnNorth").disabled = true;
-               document.getElementById("btnSouth").disabled = true;
                document.getElementById("btnEast").disabled = true;
-            }  else {
-            if (currentLocale === "Room7") {
-               document.getElementById("btnWest").disabled = true;
-               document.getElementById("btnNorth").disabled = true;
-               document.getElementById("btnSouth").disabled = true;
-               document.getElementById("btnEast").disabled = true;
-            }
-               }
-               }
-               }
-               }
-               }
                }
          }
 

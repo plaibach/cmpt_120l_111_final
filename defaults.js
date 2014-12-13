@@ -27,7 +27,7 @@
          var rucksackMaxVolume = 40;
 
       // Set initial/default refresh game response to display in historyTextArea onload in response to "Refresh" playerAction.
-         var message = "You have just entered an unmarked door at the south end of a nondescript building. The door swings gently shut behind you and latches with a slight, yet somehow ominous \"click.\"";
+         var message = this.localeArray[currentLocale].localeDesc;
 
       // Set text for showHelp function.
          var helpText = "You may navigate by clicking the directional buttons. You may also navigate by entering \n\"W\", \"N\", \"S\", or \"E\" in the command bar and then pressing [Enter] or clicking [Go].\n\nAll other actions are available only through use of the command bar. For example, your rucksack inventory may be displayed by typing \"Inventory\" in the command bar and then pressing [Enter] or clicking [Go].\n\nTry commands and phrases using keywords such as \"Look\", \"Take\", \"Drop\", or \"Find\".\n\nFor example, if you find a possibly useful item while stumbling about, a \"take [item]\" command might work. Even so, it's still up to you to figure out what is useful and how to use it.";

@@ -12,79 +12,79 @@
       // Define mapLocale class-prototype.
          function mapLocale() {
             this.localeID = 0;
-            this.localeVisited = 0;
-            this.localeName = "";
-            this.localeDesc = "";
-            this.localeBlock = "";
+            this.localeVisits = 0;
+            this.localeName = "localeName";
+            this.localeDesc = "localeDesc";
+            this.localeDirBlocked = "Erm... sorry, you can't go that way.";
          }
 
       // Instantiate mapLocale class-prototype instances.
          var locale_0 = new mapLocale();
             locale_0.localeID = 0;
             locale_0.localeVisits = 1;
-            locale_0.localeName = "Utility Yard (0)";
+            locale_0.localeName = "Utility Yard";
             locale_0.localeDesc = "After a night of drunken debauchery, you wake to find yourself trapped in the utility enclosure of what appears to be an abandoned shopping mall. The gate leading to the parking lot and freedom is chained and locked. All the surrounding fencing and gate are topped with razor wire. To the north there is a doorway to the interior of the building.";
-            locale_0.localeBlock = "Chained and locked, remember?";
+            locale_0.localeDirBlocked = "Chained and locked, remember?";
          var locale_1 = new mapLocale();
             locale_1.localeID = 1;
-            locale_1.localeVisits = 0;
-            locale_1.localeName = "Room 1";
-            locale_1.localeDesc = "Description for Room 1";
-            locale_1.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_1.localeVisits = 0;
+            locale_1.localeName = "Maintenance Room";
+            locale_1.localeDesc = "You have just entered an unmarked door at the south end of a nondescript building. The door swings gently shut behind you and latches with a slight, yet somehow ominous \"click.\"";
+            locale_1.localeDirBlocked = "Sorry, the door locked behind you when you stepped in. There is a keyhole, but you don't have any keys. It seems there's only one way to go.";
          var locale_2 = new mapLocale();
             locale_2.localeID = 2;
-            locale_2.localeVisits = 0;
+            // locale_2.localeVisits = 0;
             locale_2.localeName = "Room 2";
             locale_2.localeDesc = "Description for Room 2";
-            locale_2.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_2.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_3 = new mapLocale();
             locale_3.localeID = 3;
-            locale_3.localeVisits = 0;
+            // locale_3.localeVisits = 0;
             locale_3.localeName = "Room 3";
             locale_3.localeDesc = "Description for Room 3";
-            locale_3.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_3.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_4 = new mapLocale();
             locale_4.localeID = 4;
-            locale_4.localeVisits = 0;
-            locale_4.localeName = "Pit of Despair (4)";
+            // locale_4.localeVisits = 0;
+            locale_4.localeName = "Pit of Despair";
             locale_4.localeDesc = "You have fallen a long distance straigt down to land on something cold, lumpy, and... moist. Welcome to THE PIT OF DESPAIR!\nThere is no way out :-O (Or... is there?)";
-            locale_4.localeBlock = "It rubs the lotion on its skin or else it gets the hose again.";
+            locale_4.localeDirBlocked = "It rubs the lotion on its skin or else it gets the hose again.";
          var locale_5 = new mapLocale();
             locale_5.localeID = 5;
-            locale_5.localeVisits = 0;
+            // locale_5.localeVisits = 0;
             locale_5.localeName = "Room 5";
             locale_5.localeDesc = "Description for Room 5";
-            locale_5.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_5.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_6 = new mapLocale();
             locale_6.localeID = 6;
-            locale_6.localeVisits = 0;
+            // locale_6.localeVisits = 0;
             locale_6.localeName = "Room 6";
             locale_6.localeDesc = "Description for Room 6";
-            locale_6.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_6.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_7 = new mapLocale();
             locale_7.localeID = 7;
-            locale_7.localeVisits = 0;
+            // locale_7.localeVisits = 0;
             locale_7.localeName = "Room 7";
             locale_7.localeDesc = "Description for Room 7";
-            locale_7.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_7.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_8 = new mapLocale();
             locale_8.localeID = 8;
-            locale_8.localeVisits = 0;
+            // locale_8.localeVisits = 0;
             locale_8.localeName = "Room 8";
             locale_8.localeDesc = "Description for Room 8";
-            locale_8.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_8.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_9 = new mapLocale();
             locale_9.localeID = 9;
-            locale_9.localeVisits = 0;
+            // locale_9.localeVisits = 0;
             locale_9.localeName = "Room 9";
             locale_9.localeDesc = "Description for Room 9";
-            locale_9.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_9.localeDirBlocked = "Use default attribute from parent class-prototype.";
          var locale_10 = new mapLocale();
             locale_10.localeID = 10;
-            locale_10.localeVisits = 0;
+            // locale_10.localeVisits = 0;
             locale_10.localeName = "Room 10";
             locale_10.localeDesc = "Description for Room 10";
-            locale_10.localeBlock = "Erm... sorry, you can't go that way.";
+            // locale_10.localeDirBlocked = "Use default attribute from parent class-prototype.";
 
       // Store mapLocale instances in global array.
          var localeArray = [];
@@ -108,8 +108,8 @@
       // Define usefulItems class-prototype.
          function usefulItem() {
             this.itemID = 0;
-            this.itemName = "";
-            this.itemLocation = "";
+            this.itemName = "itemName";
+            this.itemLocation = "itemLocation";
             this.itemWeight = 0;
             this.itemVolume = 0;
          }
