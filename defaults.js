@@ -10,7 +10,7 @@
    // BEGIN SET MISCELLANEOUS GLOBAL VARIABLES
 
       // Set variables used for scoring.
-         var totalScore = 0;
+         var totalScore = 10;
          var newVisitPoints = 10;
          var navFailPoints = 1;
 
