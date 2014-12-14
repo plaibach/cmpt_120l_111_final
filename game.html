@@ -7,6 +7,11 @@
    Due 2014.12.11
 -->
 
+<!-- Notes to myself
+   Browsing forward and back leaves the game in a dirty, dirty state.
+   Subtract points for invalid commands, requesting Help, etc.
+-->
+
 <head>
 
    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -51,7 +56,7 @@
          text-align:center;
          border:none;
          resize:none;
-         color: red;
+         color: darkgreen;
       }
       input[type="button"] {
          background-color:green;
@@ -64,6 +69,10 @@
       input[type="text"] {
          text-align:center;
       }
+      a:link {
+         font-family:tahoma,verdana,sans-serif;
+         font-size: 90%;
+      }
       .footer {font-style:italic;}
    </style>
 
@@ -71,7 +80,7 @@
    <script type="text/javascript" src="defaults.js"></script>
    <script type="text/javascript" src="displays.js"></script>
    <script type="text/javascript" src="parsing.js"></script>
-   <script type="text/javascript" src="navigation.js"></script>
+   <script type="text/javascript" src="locations.js"></script>
 
 </head>
 
@@ -149,7 +158,8 @@
          <td>
             <!-- mailto: link to send you e-mail -->
             <a href="mailto:cmpt120@laibach.net">Email comments or abuse to me</a>
-            <!-- Display currentLocale and localeVisits in debug textarea during developement. -->
+            <br>
+            <!-- Display currentLocale and localeVisits in debug textarea during development. -->
             <textarea id="taDebug" name="taDebug" cols="48" rows="1" readonly></textarea>
          </td>
       </tr>

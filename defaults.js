@@ -8,9 +8,14 @@
 //
 
    // BEGIN SET MISCELLANEOUS GLOBAL VARIABLES
-   
-      // Set variables used for status textarea
+
+      // Set variables used for scoring.
          var totalScore = 0;
+         var newVisitPoints = 10;
+         var navFailPoints = 1;
+
+      // Set variables used for navigation and other weird-ass shit.
+         var previousLocale = 0;
          var currentLocale = 0;
 
       // Set variables to facilitate navigation via arrays
@@ -19,9 +24,8 @@
          var south = 2;
          var east  = 3;
          var climb = 4;
-         var navBlock = "Erm... sorry. You can't go that way.";
 
-      // Variables for rucksack inventory carrying limits
+      // Set variables for rucksack inventory carrying limits
          var rucksackMaxItems = 4;
          var rucksackMaxWeight = 30;
          var rucksackMaxVolume = 40;

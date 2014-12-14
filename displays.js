@@ -32,7 +32,7 @@
             updateCoreDisplays(playerAction, message);
          }
 
-      // Display "Help" or "useful" or any other temporary text we don't want to include in taHistory or taStatus.
+      // Display "Help" or "Inventory" or any other temporary text we don't want to include in taHistory or taStatus.
          function updateMultiPurposeTextArea(playerAction, message, multiPurposeText) {
             var multiPurposeTextArea = document.getElementById("taMultiPurpose");
             multiPurposeTextArea.value = multiPurposeText;
@@ -82,7 +82,7 @@
             statusTextArea.value = "Score: " + totalScore + "\n" + "Current Location: " + this.localeArray[currentLocale].localeName;
          }
 
-      // Display currentLocale and localeVisits in debug textarea during developement.
+      // Display currentLocale and localeVisits in debug textarea during development.
          function updateDebugTextArea() {
             var debugTextArea = document.getElementById("taDebug");
             debugTextArea.value = "[ currentLocale:" + currentLocale + " | localeVisits:" + this.localeArray[currentLocale].localeVisits + " ]";

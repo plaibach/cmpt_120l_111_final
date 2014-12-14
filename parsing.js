@@ -40,6 +40,8 @@
          // text was present and [Enter} key was pressed, or
          // text was present (therefore [Go] was enabled) and [Go] was clicked.
 
+      // Starting here we pass playerAction downstream for display in the historyTextArea.
+
       // Check txtCommand for single character directionals "w", "n", "s", or "e".
       // Call directional functions (same as corresponding button clicks) and pass player action variable.
          function processTxtCommands() {
@@ -60,7 +62,7 @@
       // "west", "north", "south", "east", "help", "inv", "look", "take", "drop", and "find".
          function parsedTxtCommands() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-            switch (true) {
+            switch(true) {
                case txtCommand.value.search(/west/i)  !== -1: attemptGoWest(playerAction);   break;
                case txtCommand.value.search(/north/i) !== -1: attemptGoNorth(playerAction);  break;
                case txtCommand.value.search(/south/i) !== -1: attemptGoSouth(playerAction);  break;
@@ -98,21 +100,21 @@
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             var message = "Help displayed at right -->";
             var multiPurposeText = helpText;
-            updateMultiPurposeTextArea (playerAction, message, multiPurposeText);
+            updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
          }
 
          function showInventory() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             var message = "Inventory displayed at right -->";
             var multiPurposeText = "showInventory multiPurposeText";
-            updateMultiPurposeTextArea (playerAction, message, multiPurposeText);
+            updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
          }
 
       // Provide in-line help prompt when text commands are unrecognized by any other function.
          function unknownTxtCommand() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             var message = "Please type a command and then press [Enter] or click [Go].\nUse the \"Help\" command to view examples of options available.";
-            updateAllDisplays (playerAction, message);
+            updateAllDisplays(playerAction, message);
          }
 
    // END FUNCTIONS FOR TEXT COMMANDS THAT DO NOT REQUIRE NAVIGATION OR INVENTORY PROCESSING
