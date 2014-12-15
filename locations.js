@@ -101,35 +101,6 @@
          updateAllDisplays(playerAction, message);
       }
 
-   // END NAVIGATION PROCESSING AND SCORING
-
-
-   // BEGIN INVENTORY PROCESSING AND SCORING
-
-      // Establish Usefultems locale array.
-      // X:itemID Y:mapLocale
-      var navArray = [ // 0   1   2   3   4   5   6
-              /* 0 */ [  -1,  1, -1, -1, -1],
-              /* 1 */ [  -1,  2, -1, -1, -1],
-              /* 2 */ [   5,  3,  1, -1, -1],
-              /* 3 */ [  -1,  4,  2, -1, -1],
-              /* 4 */ [  -1, -1, -1, -1, -1],
-              /* 5 */ [  -1, -1, -1,  2, -1],
-              /* 6 */ [  -1, -1, -1, -1, -1],
-              /* 7 */ [  -1, -1, -1, -1, -1],
-              /* 8 */ [  -1, -1, -1, -1, -1],
-              /* 9 */ [  -1, -1, -1, -1, -1],
-             /* 10 */ [  -1, -1, -1, -1, -1]
-      ];
-
-
-      function showInventory() {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "Inventory displayed at right -->";
-         var multiPurposeText = "showInventory multiPurposeText";
-         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
-      }
-
       // Putting this with logic for possible contextual interaction.
       function showHint() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
@@ -138,10 +109,33 @@
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
+   // END NAVIGATION PROCESSING AND SCORING
+
+
+   // BEGIN INVENTORY PROCESSING AND SCORING
+
+      // This code is similar to function lookSee and can be combined.
+      function showInventory() {
+         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         var message = "Inventory displayed at right -->";
+         // Items carried in rucksack are set to "-1" for itemLocale attribute.
+         // Filter the itemArray using "-1" as itemLocale attribute criterion.
+         var itemsFilterResult = itemArray.filter(function (listItems) {
+            return listItems.itemLocale === -1});
+         // Take the comma separated list and replace commas with returns.
+         var multiPurposeText = String(itemsFilterResult).replace(/,/g,"\n");
+         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
+      }
+
+      // This code is similar to function showInventory and can be combined.
       function lookSee() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "lookSee message";
-         var multiPurposeText = "lookSee multiPurposeText";
+         var message = "What you see around displayed at right -->";
+         // Filter the itemArray using currentLocale as itemLocale attribute criterion.
+         var itemsFilterResult = itemArray.filter(function (listItems) {
+            return listItems.itemLocale === currentLocale});
+         // Take the comma separated list and replace commas with returns.
+         var multiPurposeText = String(itemsFilterResult).replace(/,/g,"\n");
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 

@@ -70,8 +70,8 @@
                case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction);  break;
                case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);        break;
                case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);     break;
-               case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);   break;
                case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);        break;
+               case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);   break;
                case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);         break;
                case txtCommand.value.search(/take/i)  !== -1: takeItem(playerAction);        break;
                case txtCommand.value.search(/use/i)   !== -1: useItem(playerAction);         break;
