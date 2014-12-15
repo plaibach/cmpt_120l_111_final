@@ -35,7 +35,7 @@
          var message = this.localeArray[currentLocale].localeDesc;
 
       // Set text for showHelp display function.
-         var helpText = "You may navigate by clicking the directional buttons. You may also navigate by entering\n\"W\", \"N\", \"S\", or \"E\" in the command bar and then pressing [Enter] or clicking [Go].\n\nAll other actions are available only through use of the command bar. For example, the command \"Scoring\" will provide an explanation of how the journey is scored. The command \"Hint\" will provide some suggestions for completing the journey.\n\nRemember to press [Enter] or click [Go] after typing your command.";
+         var helpText = "You may navigate by clicking the directional buttons. You may also navigate by entering\n\"W\", \"N\", \"S\", or \"E\" in the command bar and then pressing [Enter] or clicking [Go].\n\nAll other actions are available only through use of the command bar. For example...\n\n\"Scoring\" will provide an explanation of how the journey is scored.\n\n\"Hint\" will provide some suggestions for completing the journey.\n\nRemember to press [Enter] or click [Go] after typing your command.";
 
       // Set text for showHint display function.
          var hintText = "You're going to need various useful items to survive this journey. It's up to you to figure out what is useful and how to use it. Collect these items along your way and carry them in your rucksack.\n\nTry commands and phrases using keywords such as \"Look\", \"Take\", \"Use\", \"Drop\", or \"Find\".\nFor example, if you find a possibly useful item while stumbling about, a \"take [item]\" command might work.\n\nYour rucksack inventory may be displayed by typing the \"Inventory\" command.\n\nRemember to press [Enter] or click [Go] after typing your commands.";
@@ -44,6 +44,9 @@
          var scoringText = "Player begins the journey with " + startingScore + " points.\n\nThe score increases by " + firstVisitPoints + " each time a new\nlocation is first visited.\n\nReturning to previously visited locations\nincurs independently escalating costs.\nThe first revisit to each location\ndeducts 1 point; the second, 2;\nthe third, 3; and so on.\n\nThe score is reduced by " + navFailPoints + " for each\nunsuccessful navigation attempt.";
 
       // Set text for showInventory function when rucksack is empty.
-         var inventoryList = "Dude, you ain't got shit!\n Nothin' but an empty rucksack.";
+         var inventoryNothingText = "Dude, you ain't got shit!\n Nothin' but an empty rucksack.";
+
+      // Set text for lookSee function when locale contains no useful items.
+         var lookSeeNothingText = "Yo. There's nothing useful around here.";
 
    // END SET MISCELLANEOUS GLOBAL VARIABLES

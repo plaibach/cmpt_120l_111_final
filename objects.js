@@ -23,7 +23,7 @@
             locale_0.localeID = 0;
             locale_0.localeVisits = 1;
             locale_0.localeName = "Utility Yard";
-            locale_0.localeDesc = "After a night of drunken debauchery, you wake to find yourself trapped in the utility enclosure of what appears to be an abandoned shopping mall. The gate leading to the parking lot and freedom is chained and locked. All the surrounding fencing and gate are topped with razor wire. To the north there is a doorway to the interior of the building.";
+            locale_0.localeDesc = "After a night of drunken debauchery, you wake to find yourself trapped in the utility enclosure of what appears to be an abandoned shopping mall.\n\nThe gate leading to the parking lot and freedom is chained and locked. The gate and all the surrounding fencing are topped with razor wire.\n\nYour shirt is nowhere to be found; however, somewhat inexplicably, you are still wearing your backback. That's just weird. And disturbingly hawt.\n\nTo the north there is a doorway to the interior of the building.";
             locale_0.localeDirBlocked = "Chained and locked, remember?";
          var locale_1 = new MapLocale();
             locale_1.localeID = 1;

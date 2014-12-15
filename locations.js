@@ -122,8 +122,12 @@
          // Filter the itemArray using "-1" as itemLocale attribute criterion.
          var itemsFilterResult = itemArray.filter(function (listItems) {
             return listItems.itemLocale === -1});
-         // Take the comma separated list and replace commas with returns.
-         var multiPurposeText = String(itemsFilterResult).replace(/,/g,"\n");
+         if (String(itemsFilterResult) === "") {
+            itemsFilterResult = lookSeeNothingText
+         } else
+            // Take the comma separated list and replace commas with returns.
+            itemsFilterResult = String(itemsFilterResult).replace(/,/g,"\n");
+         var multiPurposeText = "--- Items in Rucksack ---" + "\n\n" + itemsFilterResult;
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
@@ -134,8 +138,12 @@
          // Filter the itemArray using currentLocale as itemLocale attribute criterion.
          var itemsFilterResult = itemArray.filter(function (listItems) {
             return listItems.itemLocale === currentLocale});
-         // Take the comma separated list and replace commas with returns.
-         var multiPurposeText = String(itemsFilterResult).replace(/,/g,"\n");
+         if (String(itemsFilterResult) === "") {
+            itemsFilterResult = lookSeeNothingText
+         } else
+            // Take the comma separated list and replace commas with returns.
+            itemsFilterResult = String(itemsFilterResult).replace(/,/g,"\n");
+         var multiPurposeText = "--- Looking Around ---" + "\n\n" + itemsFilterResult;
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
