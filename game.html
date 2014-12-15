@@ -11,21 +11,27 @@
 
    Project criteria still in progress:
       Functions
-         Look
-         Take
-         Inv
-         Use
-         Find
+         showInventory()
+         lookSee()
+         takeItem()
+         useItem()
       Ten Locations
       Restore escape puzzle for Pit of Despair
       Inventory: list of items in current location
       Winning the game? Puzzles to achieve minimum score for escape?
 
    Optional scope creep ideas:
-      Add chute attempt-fail for Room 5
-      Add lotion counter for assistance out of Pit of Despair
-      Consider temporarily displaying map, Help, and Inventory in taHistory text area
-      Clear "Help" display only upon valid command input, rather than on any input
+      Align taMultiPurpose text vertically in middle.
+      Functions
+         attemptGoClimb()
+         dropItem()
+         findItem()
+      Add contextual interaction to showHint function.
+      Add chute attempt-fail for Room 5.
+      Add lotion counter for assistance out of Pit of Despair.
+      Add Help Menu mode for first level help, display details in taMultiPurpose.
+      Change persistence of map, Help, and Inventory displays.
+      Clear "Help" display only upon valid command input, rather than on any input.
       Subtract points for invalid commands, requesting Help, etc.
       Do something nasty if player reached 0 points.
       Browsing forward and back leaves the game in a dirty, dirty state.

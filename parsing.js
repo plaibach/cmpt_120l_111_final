@@ -69,9 +69,12 @@
                case txtCommand.value.search(/east/i)  !== -1: attemptGoEast(playerAction);   break;
                case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction);  break;
                case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);        break;
+               case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);     break;
                case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);   break;
+               case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);        break;
                case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);         break;
                case txtCommand.value.search(/take/i)  !== -1: takeItem(playerAction);        break;
+               case txtCommand.value.search(/use/i)   !== -1: useItem(playerAction);         break;
                case txtCommand.value.search(/drop/i)  !== -1: dropItem(playerAction);        break;
                case txtCommand.value.search(/find/i)  !== -1: findItem(playerAction);        break;
                default: specialTxtCommands();
@@ -103,10 +106,10 @@
             updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
          }
 
-         function showInventory() {
+         function showScoring() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-            var message = "Inventory displayed at right -->";
-            var multiPurposeText = "showInventory multiPurposeText";
+            var message = "Scoring displayed at right -->";
+            var multiPurposeText = scoringText;
             updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
          }
 

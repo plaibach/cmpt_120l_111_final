@@ -24,7 +24,9 @@
 
    // BEGIN NAVIGATION PROCESSING AND SCORING
 
-      // Establish navigational permissions array.
+      // Establish navigational logic array.
+         // Y:currentLocale
+         // X:direction navAttempt 
       var navArray = [ // W   N   S   E   Climb
               /* 0 */ [  -1,  1, -1, -1, -1],
               /* 1 */ [  -1,  2, -1, -1, -1],
@@ -74,7 +76,7 @@
          // If attempted direction is valid...
             // Copy currentLocale to previousLocale,
             previousLocale = currentLocale;
-            // Copy attempted location value from navArray to currentLocale,
+            // Copy attempted direction locale value from navArray to currentLocale,
             currentLocale = navArray[currentLocale][navAttempt];
             // Copy updated LocaleDesc to 'message' for game response.
             message = this.localeArray[currentLocale].localeDesc;
@@ -82,8 +84,9 @@
             localeArray[currentLocale].localeVisits++;
             // Add newVisitPoints value for first visit to MapLocale.
             if (localeArray[currentLocale].localeVisits === 1) {
-               totalScore = totalScore + newVisitPoints;
-            // Subtract increasing points each time returning to a MapLocale.
+               totalScore = totalScore + firstVisitPoints;
+            // Subtract increasing points each time player returns to a MapLocale.
+            // Use localeVisits + 1 so player does not lose a point for the initial visit.
             }  else {
                totalScore = totalScore - localeArray[currentLocale].localeVisits + 1;
                }
@@ -103,6 +106,38 @@
 
    // BEGIN INVENTORY PROCESSING AND SCORING
 
+      // Establish Usefultems locale array.
+      // X:itemID Y:mapLocale
+      var navArray = [ // 0   1   2   3   4   5   6
+              /* 0 */ [  -1,  1, -1, -1, -1],
+              /* 1 */ [  -1,  2, -1, -1, -1],
+              /* 2 */ [   5,  3,  1, -1, -1],
+              /* 3 */ [  -1,  4,  2, -1, -1],
+              /* 4 */ [  -1, -1, -1, -1, -1],
+              /* 5 */ [  -1, -1, -1,  2, -1],
+              /* 6 */ [  -1, -1, -1, -1, -1],
+              /* 7 */ [  -1, -1, -1, -1, -1],
+              /* 8 */ [  -1, -1, -1, -1, -1],
+              /* 9 */ [  -1, -1, -1, -1, -1],
+             /* 10 */ [  -1, -1, -1, -1, -1]
+      ];
+
+
+      function showInventory() {
+         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         var message = "Inventory displayed at right -->";
+         var multiPurposeText = "showInventory multiPurposeText";
+         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
+      }
+
+      // Putting this with logic for possible contextual interaction.
+      function showHint() {
+         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         var message = "Hints displayed at right -->";
+         var multiPurposeText = hintText;
+         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
+      }
+
       function lookSee() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
          var message = "lookSee message";
@@ -117,18 +152,27 @@
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      function dropItem() {
+      function useItem() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "Ehhh... You better hang on to that.";
-         var multiPurposeText = "dropItem multiPurposeText";
+         var message = "useItem message";
+         var multiPurposeText = "useItem multiPurposeText";
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
+      // This is an abusive placeholder function for future development.
+      function dropItem() {
+         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         var message = "Bad idea... keep what you have, fool.";
+         // var multiPurposeText = "dropItem multiPurposeText";
+         updateMultiPurposeTextArea(playerAction, message);
+      }
+
+      // This is an abusive placeholder function for future development.
       function findItem() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
          var message = "Find it yourself, bitch.";
-         var multiPurposeText = "findItem multiPurposeText";
-         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
+         // var multiPurposeText = "findItem multiPurposeText";
+         updateMultiPurposeTextArea(playerAction, message);
       }
 
    // END INVENTORY PROCESSING AND SCORING

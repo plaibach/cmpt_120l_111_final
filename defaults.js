@@ -10,8 +10,9 @@
    // BEGIN SET MISCELLANEOUS GLOBAL VARIABLES
 
       // Set variables used for scoring.
-         var totalScore = 10;
-         var newVisitPoints = 10;
+         var startingScore = 10;
+         var totalScore = startingScore;
+         var firstVisitPoints = 10;
          var navFailPoints = 1;
 
       // Set variables used for navigation and other weird-ass shit.
@@ -33,8 +34,14 @@
       // Set initial/default refresh game response to display in historyTextArea onload in response to "Refresh" playerAction.
          var message = this.localeArray[currentLocale].localeDesc;
 
-      // Set text for showHelp function.
-         var helpText = "You may navigate by clicking the directional buttons. You may also navigate by entering \n\"W\", \"N\", \"S\", or \"E\" in the command bar and then pressing [Enter] or clicking [Go].\n\nAll other actions are available only through use of the command bar. For example, your rucksack inventory may be displayed by typing \"Inventory\" in the command bar and then pressing [Enter] or clicking [Go].\n\nTry commands and phrases using keywords such as \"Look\", \"Take\", \"Drop\", or \"Find\".\n\nFor example, if you find a possibly useful item while stumbling about, a \"take [item]\" command might work. Even so, it's still up to you to figure out what is useful and how to use it.";
+      // Set text for showHelp display function.
+         var helpText = "You may navigate by clicking the directional buttons. You may also navigate by entering\n\"W\", \"N\", \"S\", or \"E\" in the command bar and then pressing [Enter] or clicking [Go].\n\nAll other actions are available only through use of the command bar. For example, the command \"Scoring\" will provide an explanation of how the journey is scored. The command \"Hint\" will provide some suggestions for completing the journey.\n\nRemember to press [Enter] or click [Go] after typing your command.";
+
+      // Set text for showHint display function.
+         var hintText = "You're going to need various useful items to survive this journey. It's up to you to figure out what is useful and how to use it. Collect these items along your way and carry them in your rucksack.\n\nTry commands and phrases using keywords such as \"Look\", \"Take\", \"Use\", \"Drop\", or \"Find\".\nFor example, if you find a possibly useful item while stumbling about, a \"take [item]\" command might work.\n\nYour rucksack inventory may be displayed by typing the \"Inventory\" command.\n\nRemember to press [Enter] or click [Go] after typing your commands.";
+
+      // Set text for showScoring display function.
+         var scoringText = "Player begins the journey with " + startingScore + " points.\n\nThe score increases by " + firstVisitPoints + " each time a new\nlocation is first visited.\n\nReturning to previously visited locations\nincurs independently escalating costs.\nThe first revisit to each location\ndeducts 1 point; the second, 2;\nthe third, 3; and so on.\n\nThe score is reduced by " + navFailPoints + " for each\nunsuccessful navigation attempt.";
 
       // Set text for showInventory function when rucksack is empty.
          var inventoryList = "Dude, you ain't got shit!\n Nothin' but an empty rucksack.";
