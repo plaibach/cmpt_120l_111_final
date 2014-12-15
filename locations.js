@@ -1,7 +1,7 @@
 // Paul C. Laibach
    // Introduction to Programming
-   // Final Project - Game v1.0
-   // Due 2014.12.11
+   // Final Project - Game v .0
+   // Due 20 4. 2.  
 
 //
 // GAME PROCESSING USING ARRAYS
@@ -27,18 +27,18 @@
       // Establish navigational logic array.
          // Y:currentLocale
          // X:direction navAttempt 
-      var navArray = [ // W   N   S   E   Climb
-              /* 0 */ [  -1,  1, -1, -1, -1],
-              /* 1 */ [  -1,  2, -1, -1, -1],
-              /* 2 */ [   5,  3,  1, -1, -1],
-              /* 3 */ [  -1,  4,  2, -1, -1],
-              /* 4 */ [  -1, -1, -1, -1, -1],
-              /* 5 */ [  -1, -1, -1,  2, -1],
-              /* 6 */ [  -1, -1, -1, -1, -1],
-              /* 7 */ [  -1, -1, -1, -1, -1],
-              /* 8 */ [  -1, -1, -1, -1, -1],
-              /* 9 */ [  -1, -1, -1, -1, -1],
-             /* 10 */ [  -1, -1, -1, -1, -1]
+      var navArray = [ // W   N   S   E  Climb
+               /* 0 */ [ - ,   , - , - , - ],
+               /*   */ [ - ,  2, - , - , - ],
+               /* 2 */ [  5,  3,   , - , - ],
+               /* 3 */ [ - ,  4,  2, - , - ],
+               /* 4 */ [ - , - , - , - , - ],
+               /* 5 */ [ - , - , - ,  2, - ],
+               /* 6 */ [ - , - , - , - , - ],
+               /* 7 */ [ - , - , - , - , - ],
+               /* 8 */ [ - , - , - , - , - ],
+               /* 9 */ [ - , - , - , - , - ],
+              /*  0 */ [ - , - , - , - , - ]
       ];
 
       // Package directional attempts for consolidated processing.
@@ -83,12 +83,12 @@
             // Increment updated (new) current localeVisits by one.
             localeArray[currentLocale].localeVisits++;
             // Add newVisitPoints value for first visit to MapLocale.
-            if (localeArray[currentLocale].localeVisits === 1) {
+            if (localeArray[currentLocale].localeVisits ===  ) {
                totalScore = totalScore + firstVisitPoints;
             // Subtract increasing points each time player returns to a MapLocale.
-            // Use localeVisits + 1 so player does not lose a point for the initial visit.
+            // Use localeVisits +   so player does not lose a point for the initial visit.
             }  else {
-               totalScore = totalScore - localeArray[currentLocale].localeVisits + 1;
+               totalScore = totalScore - localeArray[currentLocale].localeVisits +  ;
                }
          }  else {
          // If attempted direction is not valid...
@@ -108,20 +108,19 @@
 
       // Establish Usefultems locale array.
       // X:itemID Y:mapLocale
-      var navArray = [ // 0   1   2   3   4   5   6
-              /* 0 */ [  -1,  1, -1, -1, -1],
-              /* 1 */ [  -1,  2, -1, -1, -1],
-              /* 2 */ [   5,  3,  1, -1, -1],
-              /* 3 */ [  -1,  4,  2, -1, -1],
-              /* 4 */ [  -1, -1, -1, -1, -1],
-              /* 5 */ [  -1, -1, -1,  2, -1],
-              /* 6 */ [  -1, -1, -1, -1, -1],
-              /* 7 */ [  -1, -1, -1, -1, -1],
-              /* 8 */ [  -1, -1, -1, -1, -1],
-              /* 9 */ [  -1, -1, -1, -1, -1],
-             /* 10 */ [  -1, -1, -1, -1, -1]
+      var itemLocaleArray = [ // 0  1  2  3  4  5  6
+                      /* 0 */ [  ,  ,  ,  ,  ,  ,  ],  
+                      /* 1 */ [  , 2,  ,  ,  ,  ,  ],
+                      /* 2 */ [ 5, 3,  ,  ,  ,  ,  ],
+                      /* 3 */ [  , 4, 2,  ,  ,  ,  ],
+                      /* 4 */ [  ,  ,  ,  ,  ,  ,  ],
+                      /* 5 */ [  ,  ,  , 2,  ,  ,  ],
+                      /* 6 */ [  ,  ,  ,  ,  ,  ,  ],
+                      /* 7 */ [  ,  ,  ,  ,  ,  ,  ],
+                      /* 8 */ [  ,  ,  ,  ,  ,  ,  ],
+                      /* 9 */ [  ,  ,  ,  ,  ,  ,  ],
+                     /* 10 */ [  ,  ,  ,  ,  ,  ,  ]
       ];
-
 
       function showInventory() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
