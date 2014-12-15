@@ -71,6 +71,7 @@
          // Subtract navFailPoints each time a navigation attempt is denied.
          // Pass playerAction and message downstream for display in the historyTextArea.
 
+      // Process navigation using directional logic array. 
       function navLogic(playerAction, navAttempt) {
          if (navArray[currentLocale][navAttempt] >=0) {
          // If attempted direction is valid...
@@ -85,9 +86,9 @@
             // Add newVisitPoints value for first visit to MapLocale.
             if (localeArray[currentLocale].localeVisits === 1) {
                totalScore = totalScore + firstVisitPoints;
-            // Subtract increasing points each time player returns to a MapLocale.
-            // Use localeVisits + 1 so player does not lose a point for the initial visit.
             }  else {
+            // Subtract increasing points each time player returns to a MapLocale.
+               // Use localeVisits + 1 so player does not lose a point for the initial visit.
                totalScore = totalScore - localeArray[currentLocale].localeVisits + 1;
                }
          }  else {
@@ -101,7 +102,32 @@
          updateAllDisplays(playerAction, message);
       }
 
-      // Putting this with logic for possible contextual interaction.
+      // Process navigation invoked by special comboTxtCommands.
+      function escapePit(playerAction) {
+         if (currentLocale === 4) {
+            // Copy currentLocale to previousLocale,
+            previousLocale = currentLocale;
+            // Transport player to locale_6
+            // THIS NEEDS TO BE FIXED !!!
+            currentLocale = 5;
+            // Copy updated LocaleDesc to 'message' for game response.
+            message = this.localeArray[currentLocale].localeDesc;
+            // Increment updated (new) current localeVisits by one.
+            localeArray[currentLocale].localeVisits++;
+            // Add newVisitPoints value for first visit to MapLocale.
+            if (localeArray[currentLocale].localeVisits === 1) {
+               totalScore = totalScore + firstVisitPoints;
+            }  else {
+            // Subtract increasing points each time player returns to a MapLocale.
+               // Use localeVisits + 1 so player does not lose a point for the initial visit.
+               totalScore = totalScore - localeArray[currentLocale].localeVisits + 1;
+               }
+            // Pass playerAction and message downstream.
+            updateAllDisplays(playerAction, message);
+         }  else unknownTxtCommand();
+      }
+
+      // Putting this with navigation logic for possible contextual interaction.
       function showHint() {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
          var message = "Hints displayed at right -->";
@@ -182,11 +208,6 @@
 /*
 // BEGIN JUNK FOR REFERENCE
 //
-
-   // This is where we end up after "rub and "lotion" are parsed while in Room4, the Abyss.
-      function escapedAbyss(playerAction) {
-         var message = ;
-      }
 
    // This is left over from the guessing exercise, and may be utilized a bit later on.
       function mustGuess(playerAction) {

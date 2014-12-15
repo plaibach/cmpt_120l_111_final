@@ -54,12 +54,13 @@
                case "s": attemptGoSouth(playerAction); break;
                case "e": attemptGoEast(playerAction);  break;
                case "c": attemptGoClimb(playerAction); break;
+               case "i": showInventory(playerAction);  break;
+               case "l": lookSee(playerAction);        break;
                default: parsedTxtCommands();
             }
          }
 
-      // Check txtCommand for the substrings
-      // "west", "north", "south", "east", "help", "inv", "look", "take", "drop", and "find".
+      // Check txtCommand for simple substrings; e.g., "west", "north", "south", "east", "help", etc.
          function parsedTxtCommands() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             switch(true) {
@@ -77,18 +78,17 @@
                case txtCommand.value.search(/use/i)   !== -1: useItem(playerAction);         break;
                case txtCommand.value.search(/drop/i)  !== -1: dropItem(playerAction);        break;
                case txtCommand.value.search(/find/i)  !== -1: findItem(playerAction);        break;
-               default: specialTxtCommands();
+               default: comboTxtCommands();
             }
          }
 
-      // Check txtCommand for special combinations of substrings
-      // "rub" && "lotion" which is used to escape from the Abyss.
-         function specialTxtCommands() {
+      // Check txtCommand for combinations of substrings; e.g., "rub" && "lotion" to escape Pit of Despair.
+         function comboTxtCommands() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-            if ((currentLocale === "Room4") && (txtCommand.value.search(/rub/i) !== -1) && (txtCommand.value.search(/lotion/i)) !== -1) {
-               escapedAbyss(playerAction);
-            }  else {
-               unknownTxtCommand();
+            switch(true) {
+               case txtCommand.value.search(/rub/i) !== -1 && txtCommand.value.search(/lotion/i) !== -1:
+                  escapePit(playerAction); break;
+               default: unknownTxtCommand();
             }
          }
 
