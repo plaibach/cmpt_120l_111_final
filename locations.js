@@ -173,14 +173,17 @@
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      function takeItem() {
+      function takeItem(item) {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "takeItem message";
+
+         var message = "takeItem " + item
+         // var message = "takeItem message";
+
          var multiPurposeText = "takeItem multiPurposeText";
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      function useItem() {
+      function useItem(used) {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
          var message = "useItem message";
          var multiPurposeText = "useItem multiPurposeText";
@@ -188,9 +191,12 @@
       }
 
       // This is an abusive placeholder function for future development.
-      function dropItem() {
+      function dropItem(item) {
          var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "Bad idea... keep what you have, fool.";
+
+         var message = "dropItem " + item
+         //var message = "Bad idea... keep what you have, fool.";
+
          // var multiPurposeText = "dropItem multiPurposeText";
          updateMultiPurposeTextArea(playerAction, message);
       }
