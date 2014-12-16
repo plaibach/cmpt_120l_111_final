@@ -11,33 +11,36 @@
 
    Project criteria still in progress:
       Functions:
-         takeItem() [compass]
+         takeItem() [Compass]
          useItem()
-      Ten Locations.
+      Ten Locations [Graffiti Gallery]
+         Floorplan ideas at www.gjbgraphics.com/usefulstring/bakuba.html
       Escape from Pit of Despair logic still needs to be refined.
       Winning the game? Puzzles to achieve minimum score for escape?
 
    These items should really get done if possible.
-      Refactor code shared by showInventory and lookSee functions.
       Functions:
          attemptGoClimb()
          dropItem()
          findItem()
+
+   Code that works, but could/should be refactored:
+      Merge showInventory and lookSee functions?
+      Simplify comboTxtCommand parsing; perhaps an array?
 
    Issues and annoyances:
       The text command [Go] button is inactive for a moment after entering text.
          I suspect this is due to the onkeyup and onkeypress function calls.
 
    Optional scope creep ideas:
-      Add compass status or images.
-      Graffiti gallery (floorplan www.gjbgraphics.com/usefulstring/bakuba.html)
+      Add Compass status text or images.
+         Use alternate descriptions when player has Compass.
       Add showMap() funtion to, well... show the map.
       Add escalating responses for localeVisits =2 and >=3.
       Align taMultiPurpose text vertically in middle.
       Add contextual interaction to showHint function.
       Add chute attempt-fail for Room 5.
       Add lotion counter for assistance out of Pit of Despair.
-      Add Help Menu mode for first level help, display details in taMultiPurpose.
       Change persistence of map, Help, and Inventory displays.
       Clear "Help" display only upon valid command input, rather than on any input.
       Subtract points for invalid commands, requesting Help, etc.
