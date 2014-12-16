@@ -11,7 +11,7 @@
 
    Project criteria still in progress:
       Functions:
-         takeItem()
+         takeItem() [compass]
          useItem()
       Ten Locations.
       Escape from Pit of Despair logic still needs to be refined.
@@ -25,6 +25,8 @@
          findItem()
 
    Optional scope creep ideas:
+      Add compass status or images.
+      Graffiti gallery (floorplan www.gjbgraphics.com/usefulstring/bakuba.html)
       Add showMap() funtion to, well... show the map.
       Add escalating responses for localeVisits =2 and >=3.
       Align taMultiPurpose text vertically in middle.
@@ -157,7 +159,7 @@
                    name="btnTxtCommand"
                    value="Go"
                    disabled=disabled
-                   onclick="simpleTextCommand();" />
+                   onclick="processTextCommand();" />
             <br>
             <br>
          </td>
