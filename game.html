@@ -24,6 +24,10 @@
          dropItem()
          findItem()
 
+   Issues and annoyances:
+      The text command [Go] button is inactive for a moment after entering text.
+         I suspect this is due to the onkeyup and onkeypress function calls.
+
    Optional scope creep ideas:
       Add compass status or images.
       Graffiti gallery (floorplan www.gjbgraphics.com/usefulstring/bakuba.html)
@@ -159,7 +163,7 @@
                    name="btnTxtCommand"
                    value="Go"
                    disabled=disabled
-                   onclick="processTxtCommand();" />
+                   onclick="verifyTxtPresent();" />
             <br>
             <br>
          </td>
