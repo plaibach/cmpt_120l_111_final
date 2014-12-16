@@ -58,6 +58,7 @@
             updateHistoryTextArea(playerAction, message);
             updateStatusTextArea();
             clearTxtCommand();
+            setBtnTxtCommand();
             resetTxtCommandPlaceHolder();
             focusOnTxtCommand();
             setBtnState();
@@ -103,7 +104,18 @@
             document.getElementById("txtCommand").focus();
          }
 
-      // Set button status using navArray navigational permissions array
+      // Monitor whether txtCommand is blank and update status of btnTxtCommand accordingly.
+         function setBtnTxtCommand() {
+            if (txtCommand.value !== "") {
+               document.getElementById("btnTxtCommand").disabled = false;
+            }  else {
+                  if (txtCommand.value === "") {
+                     document.getElementById("btnTxtCommand").disabled = true;
+                  }
+               }
+         }
+
+      // Set navigation button status using navArray navigational permissions array
          function setBtnState() {
             if (navArray[currentLocale][west] >=0) {
                document.getElementById("btnWest").disabled = false;

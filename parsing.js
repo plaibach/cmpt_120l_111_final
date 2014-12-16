@@ -20,17 +20,6 @@
                }
          }
 
-      // Monitor whether txtCommand is blank and update status of btnTxtCommand accordingly.
-         function setBtnTxtCommand() {
-            if (txtCommand.value !== "") {
-               document.getElementById("btnTxtCommand").disabled = false;
-            }  else {
-                  if (txtCommand.value === "") {
-                     document.getElementById("btnTxtCommand").disabled = true;
-                  }
-               }
-         }
-
    // END VERIFY TEXT COMMAND INPUT IS PRESENT BEFORE CONTINUING TO PARSING FUNCTIONS
 
 
