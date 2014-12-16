@@ -55,35 +55,59 @@
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             switch(true) {
                // These point to the same functions as corresponding navigation buttons.
-               case txtCommand.value.search(/west/i)  !== -1: attemptGoWest(playerAction);   break;
-               case txtCommand.value.search(/north/i) !== -1: attemptGoNorth(playerAction);  break;
-               case txtCommand.value.search(/south/i) !== -1: attemptGoSouth(playerAction);  break;
-               case txtCommand.value.search(/east/i)  !== -1: attemptGoEast(playerAction);   break;
+               case txtCommand.value.search(/west/i)  !== -1: attemptGoWest(playerAction);  break;
+               case txtCommand.value.search(/north/i) !== -1: attemptGoNorth(playerAction); break;
+               case txtCommand.value.search(/south/i) !== -1: attemptGoSouth(playerAction); break;
+               case txtCommand.value.search(/east/i)  !== -1: attemptGoEast(playerAction);  break;
                // This uses the same logic as the preceding, just has no associated button.
-               case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction);  break;
+               case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction); break;
                // These have specialty functions associated with them.
-               case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);        break;
-               case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);     break;
-               case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);        break;
-               case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);   break;
-               case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);         break;
-               // These require further processing to check for valid combination substrings.
-               case txtCommand.value.search(/take/i)  !== -1: takeItem(playerAction);        break;
-               case txtCommand.value.search(/use/i)   !== -1: useItem(playerAction);         break;
-               case txtCommand.value.search(/drop/i)  !== -1: dropItem(playerAction);        break;
-               case txtCommand.value.search(/find/i)  !== -1: findItem(playerAction);        break;
+               case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);       break;
+               case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);    break;
+               case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);       break;
+               case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);  break;
+               case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);        break;
                default: comboTxtCommands();
             }
          }
 
-      // Check txtCommand for combinations of substrings; e.g., "rub" && "lotion" to escape Pit of Despair.
+      // These require more complex processing to check for valid combination substrings.
          function comboTxtCommands() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             switch(true) {
-               case txtCommand.value.search(/rub/i) !== -1 && txtCommand.value.search(/lotion/i) !== -1:
-                  escapePit(playerAction); break;
+               case txtCommand.value.search(/take/i)  !== -1:
+                  switch(true) {
+                     case txtCommand.value.search(/compas/i) !== -1: takeItem("Compass");    break;
+                     case txtCommand.value.search(/dvd/i)    !== -1: takeItem("DVD");        break;
+                     case txtCommand.value.search(/goldf/i)  !== -1: takeItem("Goldfinger"); break;
+                     default: takeItem("Take what?");
+                  }
+                  break;
+               case txtCommand.value.search(/use/i)  !== -1:
+                  switch(true) {
+                     case txtCommand.value.search(/compas/i) !== -1: useItem("Compass");     break;
+                     case txtCommand.value.search(/dvd/i)    !== -1: useItem("DVD");         break;
+                     case txtCommand.value.search(/goldf/i)  !== -1: useItem("Goldfinger");  break;
+                     default: useItem("Use what?");
+                  }
+                  break;
+               case txtCommand.value.search(/drop/i)  !== -1:
+                  switch(true) {
+                     case txtCommand.value.search(/compas/i) !== -1: dropItem("Compass");    break;
+                     case txtCommand.value.search(/dvd/i)    !== -1: dropItem("DVD");        break;
+                     case txtCommand.value.search(/goldf/i)  !== -1: dropItem("Goldfinger"); break;
+                     default: dropItem("Drop what?");
+                  }
+                  break;
+
                default: unknownTxtCommand();
             }
+
+               // Combination substrings "rub" && "lotion" to escape Pit of Despair.
+               // case txtCommand.value.search(/rub/i) !== -1 
+               //    && txtCommand.value.search(/lotion/i) !== -1:
+               //    escapePit(playerAction); break;
+               // default: unknownTxtCommand();
          }
 
    // END PARSING AND PROCESSING OF TEXT COMMAND STRINGS
