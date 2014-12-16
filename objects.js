@@ -164,8 +164,8 @@
             item_5.itemVolume = 30;
          var item_6 = new UsefulItem();
             item_6.itemID = 6;
-            item_6.itemName = "Dog Biscuit";
-            item_6.itemLocale = 3;
+            item_6.itemName = "Compass";
+            item_6.itemLocale = 2;
             // item_6.itemStatus = ; // Inherit true/false from class-prototype
             item_6.itemWeight = 3;
             item_6.itemVolume = 3;
