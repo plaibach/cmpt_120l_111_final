@@ -16,7 +16,7 @@
                document.getElementById("btnTxtCommand").disabled = true;
                focusOnTxtCommand();
             }  else {
-                  processTxtCommands();
+                  processTxtCommand();
                }
          }
 
@@ -42,9 +42,9 @@
 
       // Starting here we pass playerAction downstream for display in the historyTextArea.
 
-      // Check txtCommand for single character directionals "w", "n", "s", or "e".
-      // Call directional functions (same as corresponding button clicks) and pass player action variable.
-         function processTxtCommands() {
+      // Check txtCommand for single character shortcuts; e.g., "w", "n", "c", "i", "l", etc.
+      // These point to the same functions as corresponding buttons and simple word substrings. 
+         function processTxtCommand() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             // Convert string to lower case for analysis
             var txtCommandLowcase = txtCommand.value.toLowerCase();
@@ -60,20 +60,25 @@
             }
          }
 
-      // Check txtCommand for simple substrings; e.g., "west", "north", "south", "east", "help", etc.
+      // Check txtCommand for simple word substrings; e.g., "west", "climb", "help", "look", etc.
+      // These point to the same functions as any corresponding buttons and single character shortcuts.
          function parsedTxtCommands() {
             var playerAction = "txtCommand \"" + txtCommand.value + "\"";
             switch(true) {
+               // These point to the same functions as corresponding navigation buttons.
                case txtCommand.value.search(/west/i)  !== -1: attemptGoWest(playerAction);   break;
                case txtCommand.value.search(/north/i) !== -1: attemptGoNorth(playerAction);  break;
                case txtCommand.value.search(/south/i) !== -1: attemptGoSouth(playerAction);  break;
                case txtCommand.value.search(/east/i)  !== -1: attemptGoEast(playerAction);   break;
+               // This uses the same logic as the preceding, just has no associated button.
                case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction);  break;
+               // These have specialty functions associated with them.
                case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);        break;
                case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);     break;
                case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);        break;
                case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);   break;
                case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);         break;
+               // These require further processing to check for valid combination substrings.
                case txtCommand.value.search(/take/i)  !== -1: takeItem(playerAction);        break;
                case txtCommand.value.search(/use/i)   !== -1: useItem(playerAction);         break;
                case txtCommand.value.search(/drop/i)  !== -1: dropItem(playerAction);        break;
