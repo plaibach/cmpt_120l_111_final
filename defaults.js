@@ -10,15 +10,16 @@
    // BEGIN SET MISCELLANEOUS GLOBAL VARIABLES
 
       // Set variables used for scoring.
-         var startingScore = 10;
+         var startingScore = 10;         // bonus
+         var firstVisitPoints = 10;      // bonus
+         var useItemPoints = 5;          // bonus
+         var navAttemptFailPoints = 1;   // penalty
+         var takeItemFailPoints = 1;     // penalty
+         var useItemFailPoints = 1;      // penalty
+         var dropItemFailPoints = 1;     // penalty
+         var findItemFailPoints = 5;     // penalty
+         var findItemPoints = 10;        // penalty
          var totalScore = startingScore;
-         var firstVisitPoints = 10;
-         var navAttemptFailPoints = 1;
-         var takeItemFailPoints = 1;
-         var useItemFailPoints = 1;
-         var dropItemFailPoints = 1;
-         var findItemFailPoints = 5;
-         var findItemPoints = 10;
 
       // Set variables used for navigation and other weird-ass shit.
          var previousLocale = 0;
@@ -54,6 +55,7 @@
          var scoringText = "--- Scoring ---\n\nPlayer begins the journey with " + startingScore + " points.\n\nThe score increases by " + firstVisitPoints + " each time a new\nlocation is first visited.\n\nReturning to previously visited locations\nincurs independently escalating costs.\nThe first revisit to each location\ndeducts 1 point; the second, 2;\nthe third, 3; and so on.\n\nThe score is reduced by " + navAttemptFailPoints + " for each\nunsuccessful navigation attempt.";
          // Player loses points per global default for failed attempts to "Take", "Use", or "Drop" items.
          // Player loses points per global default when requesting to "Find" items.
+         // Player earns points when sucessfully using items.
 
       // Set text for showInventory function when rucksack is empty.
          var rucksackEmptyText = "Dude, you ain't got shit!\n Nothin' but an empty rucksack.";
