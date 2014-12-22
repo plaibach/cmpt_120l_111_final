@@ -70,7 +70,7 @@
                case txtCommand.value.search(/drop/i)  !== -1: validateDropCombo(playerAction); break;
                case txtCommand.value.search(/find/i)  !== -1: validateFindCombo(playerAction); break;
                case txtCommand.value.search(/use/i)   !== -1: validateUseCombo(playerAction);  break;
-               case txtCommand.value.search(/rub/i)   !== -1: validateRubCombo(playerAction);  break;
+               case txtCommand.value.search(/rub/i)   !== -1: validateUseCombo(playerAction);  break;
                default: unknownTxtCommand(playerAction);
             }
          }
@@ -112,13 +112,22 @@
             }
             useItem(playerAction, parsedItemID);
          }
-
       // Command and keyword substring combination "rub" && "lotion" to escape the Pit of Despair.
-         function validateRubCombo(playerAction) {
-            if (txtCommand.value.search(/rub/i) !== -1 && txtCommand.value.search(/lotion/i) !== -1) {
-               rubLotion(playerAction);
-            }
-         }
+         // function validateRubCombo(playerAction) {
+         //    var parsedItemID = -1;
+         //    for (i = 0; i < itemArray.length; i++) {
+         //       if (txtCommand.value.toLowerCase().search(itemArray[i].itemName.toLowerCase()) !== -1) {
+         //          parsedItemID = itemArray[i].itemID;
+         //       }
+         //    }
+         //    useItem(playerAction, parsedItemID);
+         // }
+      // Command and keyword substring combination "rub" && "lotion" to escape the Pit of Despair.
+         // function validateRubCombo(playerAction) {
+         //    if (txtCommand.value.search(/rub/i) !== -1 && txtCommand.value.search(/lotion/i) !== -1) {
+         //       rubLotion(playerAction);
+         //    }
+         // }
 
    // END PARSING AND PROCESSING OF TEXT COMMAND STRINGS
 
