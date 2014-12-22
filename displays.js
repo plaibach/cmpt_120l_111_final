@@ -62,7 +62,7 @@
             resetTxtCommandPlaceHolder();
             focusOnTxtCommand();
             setBtnState();
-            // Display currentLocale and localeVisits in debug textarea during development.
+            // Display currentLocale and localeVisitCount in debug textarea during development.
             updateDebugTextArea();
          }
 
@@ -83,10 +83,10 @@
             statusTextArea.value = "Score: " + totalScore + "\n" + "Current Location: " + this.localeArray[currentLocale].localeName;
          }
 
-      // Display currentLocale and localeVisits in debug textarea during development.
+      // Display currentLocale and localeVisitCount in debug textarea during development.
          function updateDebugTextArea() {
             var debugTextArea = document.getElementById("taDebug");
-            debugTextArea.value = "[ currentLocale:" + currentLocale + " | localeVisits:" + this.localeArray[currentLocale].localeVisits + " ]";
+            debugTextArea.value = "[ currentLocale:" + currentLocale + " | localeVisitCount:" + this.localeArray[currentLocale].localeVisitCount + " ]";
          }
 
       // Since we are here, user text command input has either been evaluated and utilized, or discarded (and possibly dirty), so reset field to blank.
