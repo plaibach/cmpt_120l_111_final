@@ -172,106 +172,115 @@
 
       function takeItem(playerAction, parsedItemID) {
          switch(true) {
+         // Case when command combination keyword substring [UsefulItem] is NOT recognized.
             case parsedItemID === -1:
                totalScore = totalScore - takeItemFailPoints;
                message = commandDenied;
                multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to take!\n\nY'all gotta at least try to play coherently.\n\nThat's " + takeItemFailPoints + " off your score.\nRemember, taking a look around is free.";
                break;
+         // Case when command combination keyword substring [UsefulItem] IS in inventory.
             case itemArray[parsedItemID].itemLocale === -1:
                totalScore = totalScore - takeItemFailPoints;
                message = "You already have the " + itemArray[parsedItemID].itemName + ".";
                multiPurposeText = "-- DOH! --\n\n" + message + "\n\nKeep better track of your shit, yo.\n\nThat's " + takeItemFailPoints + " off your score.\nRemember, taking inventory is free.";
                break;
-            case currentLocale === itemArray[parsedItemID].itemLocale:
+         // Case when command combination keyword substring [UsefulItem] is NOT in the currentLocale.
+            case currentLocale !== itemArray[parsedItemID].itemLocale:
+               totalScore = totalScore - takeItemFailPoints;
+               message = "There is no " + itemArray[parsedItemID].itemName + " nearby.";
+               multiPurposeText = "--- DOH! ---\n\n" + message + "\n\nTHINK\nThink different.\nWhichever might work for you.\n\nThat's " + takeItemFailPoints + " off your score.\nRemember, looking around is free.";
+               break;
+         // Default when command combination keyword substring [UsefulItem]...
+            // IS recognized
+            // NOT in inventory
+            // IS in the currentLocale.
+            default: // takeItem
                itemArray[parsedItemID].itemLocale = -1;
                message = "You now have the " + itemArray[parsedItemID].itemName + ".";
                multiPurposeText = "--- Noice! ---\n\n" + message;
-               break;
-            default:
-               message = borkMessage;
-               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
          }
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
       function dropItem(playerAction, parsedItemID) {
          switch(true) {
+         // Case when command combination keyword substring [UsefulItem] is NOT recognized.
             case parsedItemID === -1:
                totalScore = totalScore - dropItemFailPoints;
                message = commandDenied;
                multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to drop!\n\nAnd I don't mean the acid, 'cause, Dude, you're already trippin'.\n\nThat's " + dropItemFailPoints + " off your score.\nRemember, taking inventory is free.";
                break;
+         // Case when command combination keyword substring [UsefulItem] is NOT in inventory.
             case itemArray[parsedItemID].itemLocale !== -1:
                totalScore = totalScore - dropItemFailPoints;
                message = "You don't have the " + itemArray[parsedItemID].itemName + ".";
                multiPurposeText = "-- DOH! --\n\n" + message + "\n\nKeep better track of your shit, yo.\n\nThat's " + dropItemFailPoints + " off your score.\nRemember, taking inventory is free.";
                break;
-            case itemArray[parsedItemID].itemLocale === -1:
+         // Default when command combination keyword substring [UsefulItem]...
+            // IS recognized
+            // IS in inventory
+            default: // dropItem
                itemArray[parsedItemID].itemLocale = currentLocale;
                message = "You no longer have the " + itemArray[parsedItemID].itemName + ".";
                multiPurposeText = "--- Remember! ---\n\n" + message;
-               break;
-            default:
-               message = borkMessage;
-               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
          }
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
       function findItem(playerAction, parsedItemID) {
          switch(true) {
+         // Case when command combination keyword substring [UsefulItem] is NOT recognized.
             case parsedItemID === -1:
                totalScore = totalScore - findItemFailPoints;
                message = commandDenied;
                multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to find!\n\nYou better figure out what you're really looking for, 'cause every invalid find request costs you " + findItemFailPoints + " off your score.\n\nYou think this sucked? Well, guess what. A successful search will cost you " + findItemPoints + " off your score. Have a great day.";
                break;
+         // Case when command combination keyword substring [UsefulItem] IS in inventory.
             case itemArray[parsedItemID].itemLocale === -1:
-               totalScore = totalScore - findItemFailPoints;
+               totalScore = totalScore - findItemPoints;
                message = "You already have the " + itemArray[parsedItemID].itemName + ".";
-               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nThat's some brilliant gameplay there, Jerky.\n\nThat'll be " + findItemFailPoints + " off your score.\nRemember, taking inventory and looking around is free.";
+               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nThat's some brilliant gameplay there, Jerky.\n\nThat'll be " + findItemPoints + " off your score.\nRemember, taking inventory and looking around is free.";
                break;
+         // Case when command combination keyword substring [UsefulItem] IS in the currentLocale.
             case itemArray[parsedItemID].itemLocale === currentLocale:
                totalScore = totalScore - findItemPoints;
                message = "The " + itemArray[parsedItemID].itemName + " is in this room.";
-               multiPurposeText = "--- DOH! ---\n\n" + message + "\n\nYou know, this is actually very entertaining...\n\nThank you for putting you plodding buffoonery out there for our amusement.\n\nRemember, taking a look around is free. Duh.";
+               multiPurposeText = "--- DOH! ---\n\n" + message + "\n\nYou know, this is actually very entertaining...\n\nThank you for putting you plodding buffoonery out there for our amusement.\n\nThat'll be " + findItemPoints + " off your score.\nRemember, taking a look around is free. Duh.";
                break;
-            case itemArray[parsedItemID].itemLocale !== -1:
+         // Default when command combination keyword substring [UsefulItem]...
+            // IS recognized
+            // NOT in inventory
+            // NOT in the currentLocale.
+            default: // findItem
                totalScore = totalScore - findItemPoints;
                message = "The " + itemArray[parsedItemID].itemName + " is in the " + localeArray[itemArray[parsedItemID].itemLocale].localeName + ".";
                multiPurposeText = "--- Remember! ---\n\n" + message + "\n\nI hope it was worth it. That little tidbit of trivia cost you " + findItemPoints + " off your score.\nLove ya! :-*";
-               break;
-            default:
-               message = borkMessage;
-               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
          }
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
       function useItem(playerAction, parsedItemID) {
          switch(true) {
+         // Case when command combination keyword substring [UsefulItem] is NOT recognized.
             case parsedItemID === -1:
                totalScore = totalScore - useItemFailPoints;
                message = commandDenied;
-               multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to use!\n\nYou better figure out what you're really looking for, 'cause every invalid use request costs you " + useItemFailPoints + " off your score.\n\nYou think this sucked? Well, guess what. A successful search will cost you " + useItemPoints + " off your score. Have a great day.";
+               multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to use!\n\nEvery invalid use request costs you " + useItemFailPoints + " off your score.\n\nUse the force.";
                break;
-            case itemArray[parsedItemID].itemLocale === -1:
-               totalScore = totalScore - useItemFailPoints;
-               message = "You already have the " + itemArray[parsedItemID].itemName + ".";
-               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nThat's some brilliant gameplay there, Jerky.\n\nThat'll be " + useItemFailPoints + " off your score.\nRemember, taking inventory and looking around is free.";
-               break;
-            case itemArray[parsedItemID].itemLocale === currentLocale:
-               totalScore = totalScore - useItemPoints;
-               message = "The " + itemArray[parsedItemID].itemName + " is in this room.";
-               multiPurposeText = "--- DOH! ---\n\n" + message + "\n\nYou know, this is actually very entertaining...\n\nThank you for putting you plodding buffoonery out there for our amusement.\n\nRemember, taking a look around is free. Duh.";
-               break;
+         // Case when command combination keyword substring [UsefulItem] is NOT in inventory.
             case itemArray[parsedItemID].itemLocale !== -1:
-               totalScore = totalScore - useItemPoints;
-               message = "The " + itemArray[parsedItemID].itemName + " is in the " + localeArray[itemArray[parsedItemID].itemLocale].localeName + ".";
-               multiPurposeText = "--- Remember! ---\n\n" + message + "\n\nI hope it was worth it. That little tidbit of trivia cost you " + useItemPoints + " off your score.\nLove ya! :-*";
+               totalScore = totalScore - useItemFailPoints;
+               message = "You don't have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nKeep better track of your shit, yo.\n\nThat's " + useItemFailPoints + " off your score.\nRemember, taking inventory is free.";
                break;
-            default:
-               message = borkMessage;
-               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
+         // Default when command combination keyword substring [UsefulItem]...
+            // IS recognized
+            // IS in inventory
+            default: // useItem
+               totalScore = totalScore + useItemPoints;
+               itemArray[parsedItemID].itemUseCount++
+               message = "Using the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "--- Excellent ---\n\n" + message + "\n\n itemUseCount = " + itemArray[parsedItemID].itemUseCount;
          }
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
