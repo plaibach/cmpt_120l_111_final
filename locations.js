@@ -68,7 +68,7 @@
          // Increment localeVisits as appropriate.
          // Add newVisitPoints value for first visit to MapLocale.
          // Subtract increasing points each time returning to a MapLocale.
-         // Subtract navFailPoints each time a navigation attempt is denied.
+         // Subtract navAttemptFailPoints each time a navigation attempt is denied.
          // Pass playerAction and message downstream for display in the historyTextArea.
 
       // Process navigation using directional logic array. 
@@ -95,8 +95,8 @@
          // If attempted direction is not valid...
             // Copy current localeDirBlocked to 'message' for game response.
             message = this.localeArray[currentLocale].localeDirBlocked;
-            // Subtract navFailPoints each time a navigation attempt is denied.
-            totalScore = totalScore - navFailPoints;
+            // Subtract navAttemptFailPoints each time a navigation attempt is denied.
+            totalScore = totalScore - navAttemptFailPoints;
             }
          // Pass playerAction and message downstream.
          updateAllDisplays(playerAction, message);
@@ -128,8 +128,7 @@
       }
 
       // Putting this with navigation logic for possible contextual interaction.
-      function showHint() {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+      function showHint(playerAction) {
          var message = "Hints displayed at right -->";
          var multiPurposeText = hintText;
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
@@ -141,15 +140,14 @@
    // BEGIN INVENTORY PROCESSING AND SCORING
 
       // This code is similar to function lookSee and can be combined.
-      function showInventory() {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+      function showInventory(playerAction) {
          var message = "Inventory displayed at right -->";
          // Items carried in rucksack are set to "-1" for itemLocale attribute.
          // Filter the itemArray using "-1" as itemLocale attribute criterion.
          var itemsFilterResult = itemArray.filter(function (listItems) {
             return listItems.itemLocale === -1});
          if (String(itemsFilterResult) === "") {
-            itemsFilterResult = lookSeeNothingText
+            itemsFilterResult = rucksackEmptyText
          } else
             // Take the comma separated list and replace commas with returns.
             itemsFilterResult = String(itemsFilterResult).replace(/,/g,"\n");
@@ -158,8 +156,7 @@
       }
 
       // This code is similar to function showInventory and can be combined.
-      function lookSee() {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+      function lookSee(playerAction) {
          var message = "What you see around displayed at right -->";
          // Filter the itemArray using currentLocale as itemLocale attribute criterion.
          var itemsFilterResult = itemArray.filter(function (listItems) {
@@ -173,58 +170,110 @@
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      function takeItem(item) {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-
-         var message = "takeItem " + item
-         // var message = "takeItem message";
-
-         var multiPurposeText = "takeItem multiPurposeText";
+      function takeItem(playerAction, parsedItemID) {
+         switch(true) {
+            case parsedItemID === -1:
+               totalScore = totalScore - takeItemFailPoints;
+               message = commandDenied;
+               multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to take!\n\nY'all gotta at least try to play coherently.\n\nThat's " + takeItemFailPoints + " off your score.\nRemember, taking a look around is free.";
+               break;
+            case itemArray[parsedItemID].itemLocale === -1:
+               totalScore = totalScore - takeItemFailPoints;
+               message = "You already have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nKeep better track of your shit, yo.\n\nThat's " + takeItemFailPoints + " off your score.\nRemember, taking inventory is free.";
+               break;
+            case currentLocale === itemArray[parsedItemID].itemLocale:
+               itemArray[parsedItemID].itemLocale = -1;
+               message = "You now have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "--- Noice! ---\n\n" + message;
+               break;
+            default:
+               message = borkMessage;
+               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
+         }
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      function useItem(used) {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "useItem message";
-         var multiPurposeText = "useItem multiPurposeText";
+      function dropItem(playerAction, parsedItemID) {
+         switch(true) {
+            case parsedItemID === -1:
+               totalScore = totalScore - dropItemFailPoints;
+               message = commandDenied;
+               multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to drop!\n\nAnd I don't mean the acid, 'cause, Dude, you're already trippin'.\n\nThat's " + dropItemFailPoints + " off your score.\nRemember, taking inventory is free.";
+               break;
+            case itemArray[parsedItemID].itemLocale !== -1:
+               totalScore = totalScore - dropItemFailPoints;
+               message = "You don't have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nKeep better track of your shit, yo.\n\nThat's " + dropItemFailPoints + " off your score.\nRemember, taking inventory is free.";
+               break;
+            case itemArray[parsedItemID].itemLocale === -1:
+               itemArray[parsedItemID].itemLocale = currentLocale;
+               message = "You no longer have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "--- Remember! ---\n\n" + message;
+               break;
+            default:
+               message = borkMessage;
+               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
+         }
          updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      // This is an abusive placeholder function for future development.
-      function dropItem(item) {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-
-         var message = "dropItem " + item
-         //var message = "Bad idea... keep what you have, fool.";
-
-         // var multiPurposeText = "dropItem multiPurposeText";
-         updateMultiPurposeTextArea(playerAction, message);
+      function findItem(playerAction, parsedItemID) {
+         switch(true) {
+            case parsedItemID === -1:
+               totalScore = totalScore - findItemFailPoints;
+               message = commandDenied;
+               multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to find!\n\nYou better figure out what you're really looking for, 'cause every invalid find request costs you " + findItemFailPoints + " off your score.\n\nYou think this sucked? Well, guess what. A successful search will cost you " + findItemPoints + " off your score. Have a great day.";
+               break;
+            case itemArray[parsedItemID].itemLocale === -1:
+               totalScore = totalScore - findItemFailPoints;
+               message = "You already have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nThat's some brilliant gameplay there, Jerky.\n\nThat'll be " + findItemFailPoints + " off your score.\nRemember, taking inventory and looking around is free.";
+               break;
+            case itemArray[parsedItemID].itemLocale === currentLocale:
+               totalScore = totalScore - findItemPoints;
+               message = "The " + itemArray[parsedItemID].itemName + " is in this room.";
+               multiPurposeText = "--- DOH! ---\n\n" + message + "\n\nYou know, this is actually very entertaining...\n\nThank you for putting you plodding buffoonery out there for our amusement.\n\nRemember, taking a look around is free. Duh.";
+               break;
+            case itemArray[parsedItemID].itemLocale !== -1:
+               totalScore = totalScore - findItemPoints;
+               message = "The " + itemArray[parsedItemID].itemName + " is in the " + localeArray[itemArray[parsedItemID].itemLocale].localeName + ".";
+               multiPurposeText = "--- Remember! ---\n\n" + message + "\n\nI hope it was worth it. That little tidbit of trivia cost you " + findItemPoints + " off your score.\nLove ya! :-*";
+               break;
+            default:
+               message = borkMessage;
+               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
+         }
+         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
-      // This is an abusive placeholder function for future development.
-      function findItem() {
-         var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-         var message = "Find it yourself, bitch.";
-         // var multiPurposeText = "findItem multiPurposeText";
-         updateMultiPurposeTextArea(playerAction, message);
+      function useItem(playerAction, parsedItemID) {
+         switch(true) {
+            case parsedItemID === -1:
+               totalScore = totalScore - useItemFailPoints;
+               message = commandDenied;
+               multiPurposeText = "-- DOH! --\n\n" + "\""+ txtCommand.value + "\"\n" + message + "\n\Include something legit to use!\n\nYou better figure out what you're really looking for, 'cause every invalid use request costs you " + useItemFailPoints + " off your score.\n\nYou think this sucked? Well, guess what. A successful search will cost you " + useItemPoints + " off your score. Have a great day.";
+               break;
+            case itemArray[parsedItemID].itemLocale === -1:
+               totalScore = totalScore - useItemFailPoints;
+               message = "You already have the " + itemArray[parsedItemID].itemName + ".";
+               multiPurposeText = "-- DOH! --\n\n" + message + "\n\nThat's some brilliant gameplay there, Jerky.\n\nThat'll be " + useItemFailPoints + " off your score.\nRemember, taking inventory and looking around is free.";
+               break;
+            case itemArray[parsedItemID].itemLocale === currentLocale:
+               totalScore = totalScore - useItemPoints;
+               message = "The " + itemArray[parsedItemID].itemName + " is in this room.";
+               multiPurposeText = "--- DOH! ---\n\n" + message + "\n\nYou know, this is actually very entertaining...\n\nThank you for putting you plodding buffoonery out there for our amusement.\n\nRemember, taking a look around is free. Duh.";
+               break;
+            case itemArray[parsedItemID].itemLocale !== -1:
+               totalScore = totalScore - useItemPoints;
+               message = "The " + itemArray[parsedItemID].itemName + " is in the " + localeArray[itemArray[parsedItemID].itemLocale].localeName + ".";
+               multiPurposeText = "--- Remember! ---\n\n" + message + "\n\nI hope it was worth it. That little tidbit of trivia cost you " + useItemPoints + " off your score.\nLove ya! :-*";
+               break;
+            default:
+               message = borkMessage;
+               multiPurposeText = message + "\n\n" + borkMultiPurposeText; 
+         }
+         updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
       }
 
    // END INVENTORY PROCESSING AND SCORING
-
-/*
-// BEGIN JUNK FOR REFERENCE
-//
-
-   // This is left over from the guessing exercise, and may be utilized a bit later on.
-      function mustGuess(playerAction) {
-         var secretNumber = 7;
-         var stillGuessing = true;
-         var guessedNumber = prompt("Guess a freakin' number.") ;
-         guessedNumber = parseInt(guessedNumber);
-         alert(guessedNumber);
-      }
-
-//
-// END JUNK FOR REFERENCE
-*/
-
