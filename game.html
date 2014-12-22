@@ -12,27 +12,25 @@
    Project criteria still in progress:
       Functions:
          takeItem() [Compass]
-         useItem()
+         useItem() [Lotion]
+         attemptGoClimb()
       Ten Locations [Graffiti Gallery]
          Floorplan ideas at www.gjbgraphics.com/usefulstring/bakuba.html
       Escape from Pit of Despair logic still needs to be refined.
       Winning the game? Puzzles to achieve minimum score for escape?
 
-   These items should really get done if possible.
-      Functions:
-         attemptGoClimb()
-         dropItem()
-         findItem()
-
    Code that works, but could/should be refactored:
       Merge showInventory and lookSee functions?
-      Simplify comboTxtCommand parsing; perhaps an array?
+      Consolidate various %ItemFailPoints to a single variable and value.
 
    Issues and annoyances:
       The text command [Go] button is inactive for a moment after entering text.
          I suspect this is due to the onkeyup and onkeypress function calls.
 
    Optional scope creep ideas:
+      Do something nasty if player reached 0 points.
+         Negative score is "game over".
+      Add complete list of Useful Items to Hint options.
       Add Compass status text or images.
          Use alternate descriptions when player has Compass.
       Add showMap() funtion to, well... show the map.
@@ -41,10 +39,11 @@
       Add contextual interaction to showHint function.
       Add chute attempt-fail for Room 5.
       Add lotion counter for assistance out of Pit of Despair.
+      Add take-counter and deduct points for taking an item more than once.
       Change persistence of map, Help, and Inventory displays.
       Clear "Help" display only upon valid command input, rather than on any input.
-      Subtract points for invalid commands, requesting Help, etc.
-      Do something nasty if player reached 0 points.
+      Subtract points for invalid commands, requesting Map, Help, Hints, etc.
+         Ensure player has sufficent balance to complete transaction.
       Fix browsing forward and back leaves the game in a dirty, dirty state.
 
 -->
@@ -183,7 +182,7 @@
          <td>
          </td>
          <td>
-            <textarea id="taMultiPurpose" name="taMultiPurpose" cols="48" rows="18" readonly></textarea>
+            <textarea id="taMultiPurpose" name="taMultiPurpose" cols="48" rows="25" readonly></textarea>
          </td>
       </tr>
       <tr>
