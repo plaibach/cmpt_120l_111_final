@@ -45,69 +45,79 @@
                case "c": attemptGoClimb(playerAction); break;
                case "i": showInventory(playerAction);  break;
                case "l": lookSee(playerAction);        break;
-               default: parsedTxtCommands();
+               default: parsedTxtCommands(playerAction);
             }
          }
 
       // Check txtCommand for simple word substrings; e.g., "west", "climb", "help", "look", etc.
-      // These point to the same functions as any corresponding buttons and single character shortcuts.
-         function parsedTxtCommands() {
-            var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         function parsedTxtCommands(playerAction) {
             switch(true) {
-               // These point to the same functions as corresponding navigation buttons.
-               case txtCommand.value.search(/west/i)  !== -1: attemptGoWest(playerAction);  break;
-               case txtCommand.value.search(/north/i) !== -1: attemptGoNorth(playerAction); break;
-               case txtCommand.value.search(/south/i) !== -1: attemptGoSouth(playerAction); break;
-               case txtCommand.value.search(/east/i)  !== -1: attemptGoEast(playerAction);  break;
-               // This uses the same logic as the preceding, just has no associated button.
-               case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction); break;
-               // These have specialty functions associated with them.
-               case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);       break;
-               case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);    break;
-               case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);       break;
-               case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);  break;
-               case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);        break;
-               default: comboTxtCommands();
+            // These point to the same functions as single character shortcuts and navigation buttons.
+               case txtCommand.value.search(/west/i)  !== -1: attemptGoWest(playerAction);     break;
+               case txtCommand.value.search(/north/i) !== -1: attemptGoNorth(playerAction);    break;
+               case txtCommand.value.search(/south/i) !== -1: attemptGoSouth(playerAction);    break;
+               case txtCommand.value.search(/east/i)  !== -1: attemptGoEast(playerAction);     break;
+            // This points to the same function as the single character shortcut.
+               case txtCommand.value.search(/climb/i) !== -1: attemptGoClimb(playerAction);    break;
+            // These have specialty functions associated with them.
+               case txtCommand.value.search(/help/i)  !== -1: showHelp(playerAction);          break;
+               case txtCommand.value.search(/scor/i)  !== -1: showScoring(playerAction);       break;
+               case txtCommand.value.search(/hint/i)  !== -1: showHint(playerAction);          break;
+               case txtCommand.value.search(/inv/i)   !== -1: showInventory(playerAction);     break;
+               case txtCommand.value.search(/look/i)  !== -1: lookSee(playerAction);           break;
+            // These are combination substring commands further validated against applicable keywords.
+               case txtCommand.value.search(/take/i)  !== -1: validateTakeCombo(playerAction); break;
+               case txtCommand.value.search(/drop/i)  !== -1: validateDropCombo(playerAction); break;
+               case txtCommand.value.search(/find/i)  !== -1: validateFindCombo(playerAction); break;
+               case txtCommand.value.search(/use/i)   !== -1: validateUseCombo(playerAction);  break;
+               case txtCommand.value.search(/rub/i)   !== -1: validateRubCombo(playerAction);  break;
+               default: unknownTxtCommand(playerAction);
             }
          }
 
-      // These require more complex processing to check for valid combination substrings.
-         function comboTxtCommands() {
-            var playerAction = "txtCommand \"" + txtCommand.value + "\"";
-            switch(true) {
-               case txtCommand.value.search(/take/i)  !== -1:
-                  switch(true) {
-                     case txtCommand.value.search(/compas/i) !== -1: takeItem("Compass");    break;
-                     case txtCommand.value.search(/dvd/i)    !== -1: takeItem("DVD");        break;
-                     case txtCommand.value.search(/goldf/i)  !== -1: takeItem("Goldfinger"); break;
-                     default: takeItem("Take what?");
-                  }
-                  break;
-               case txtCommand.value.search(/use/i)  !== -1:
-                  switch(true) {
-                     case txtCommand.value.search(/compas/i) !== -1: useItem("Compass");     break;
-                     case txtCommand.value.search(/dvd/i)    !== -1: useItem("DVD");         break;
-                     case txtCommand.value.search(/goldf/i)  !== -1: useItem("Goldfinger");  break;
-                     default: useItem("Use what?");
-                  }
-                  break;
-               case txtCommand.value.search(/drop/i)  !== -1:
-                  switch(true) {
-                     case txtCommand.value.search(/compas/i) !== -1: dropItem("Compass");    break;
-                     case txtCommand.value.search(/dvd/i)    !== -1: dropItem("DVD");        break;
-                     case txtCommand.value.search(/goldf/i)  !== -1: dropItem("Goldfinger"); break;
-                     default: dropItem("Drop what?");
-                  }
-                  break;
-
-               default: unknownTxtCommand();
+      // Inventory functions that must be checked for valid command and keyword substring combinations.
+         function validateTakeCombo(playerAction) {
+            var parsedItemID = -1;
+            for (i = 0; i < itemArray.length; i++) {
+               if (txtCommand.value.toLowerCase().search(itemArray[i].itemName.toLowerCase()) !== -1) {
+                  parsedItemID = itemArray[i].itemID;
+               }
             }
+            takeItem(playerAction, parsedItemID);
+         }
+         function validateDropCombo(playerAction) {
+            var parsedItemID = -1;
+            for (i = 0; i < itemArray.length; i++) {
+               if (txtCommand.value.toLowerCase().search(itemArray[i].itemName.toLowerCase()) !== -1) {
+                  parsedItemID = itemArray[i].itemID;
+               }
+            }
+            dropItem(playerAction, parsedItemID);
+         }
+         function validateFindCombo(playerAction) {
+            var parsedItemID = -1;
+            for (i = 0; i < itemArray.length; i++) {
+               if (txtCommand.value.toLowerCase().search(itemArray[i].itemName.toLowerCase()) !== -1) {
+                  parsedItemID = itemArray[i].itemID;
+               }
+            }
+            findItem(playerAction, parsedItemID);
+         }
+         function validateUseCombo(playerAction) {
+            var parsedItemID = -1;
+            for (i = 0; i < itemArray.length; i++) {
+               if (txtCommand.value.toLowerCase().search(itemArray[i].itemName.toLowerCase()) !== -1) {
+                  parsedItemID = itemArray[i].itemID;
+               }
+            }
+            useItem(playerAction, parsedItemID);
+         }
 
-               // Combination substrings "rub" && "lotion" to escape Pit of Despair.
-               // case txtCommand.value.search(/rub/i) !== -1 
-               //    && txtCommand.value.search(/lotion/i) !== -1:
-               //    escapePit(playerAction); break;
-               // default: unknownTxtCommand();
+      // Command and keyword substring combination "rub" && "lotion" to escape the Pit of Despair.
+         function validateRubCombo(playerAction) {
+            if (txtCommand.value.search(/rub/i) !== -1 && txtCommand.value.search(/lotion/i) !== -1) {
+               rubLotion(playerAction);
+            }
          }
 
    // END PARSING AND PROCESSING OF TEXT COMMAND STRINGS
@@ -117,23 +127,20 @@
 
       // Update text area displays with message or requested information only.
 
-         function showHelp() {
-            var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         function showHelp(playerAction) {
             var message = "Help displayed at right -->";
             var multiPurposeText = helpText;
             updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
          }
 
-         function showScoring() {
-            var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         function showScoring(playerAction) {
             var message = "Scoring displayed at right -->";
             var multiPurposeText = scoringText;
             updateMultiPurposeTextArea(playerAction, message, multiPurposeText);
          }
 
       // Provide in-line help prompt when text commands are unrecognized by any other function.
-         function unknownTxtCommand() {
-            var playerAction = "txtCommand \"" + txtCommand.value + "\"";
+         function unknownTxtCommand(playerAction) {
             var message = "Please type a command and then press [Enter] or click [Go].\nUse the \"Help\" command to view examples of options available.";
             updateAllDisplays(playerAction, message);
          }
