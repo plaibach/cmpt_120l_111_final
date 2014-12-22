@@ -114,7 +114,7 @@
          // This is used to keep track of how many times discarded items are retaken.
             this.itemHeldCount = 0;
          // This is used to disable items when they are used up or broken.
-            this.itemStatus = true;
+            this.itemUseCount = 0;
             this.itemWeight = 0;
             this.itemVolume = 0;
             this.toString = function() {
@@ -129,7 +129,7 @@
             item_0.itemName = "Foo Bar";
             item_0.itemLocale = 0;
             // item_0.itemHeldCount = 0;
-            item_0.itemStatus = false;
+            // item_0.itemUseCount = 0;
             item_0.itemWeight = 0;
             item_0.itemVolume = 0;
          var item_1 = new UsefulItem();
@@ -137,7 +137,7 @@
             item_1.itemName = "Flannel Pajamas";
             item_1.itemLocale = 2;
             // item_1.itemHeldCount = 0;
-            // item_1.itemStatus = true;
+            // item_1.itemUseCount = 0;
             item_1.itemWeight = 5;
             item_1.itemVolume = 5;
          var item_2 = new UsefulItem();
@@ -145,7 +145,7 @@
             item_2.itemName = "Wrench";
             item_2.itemLocale = 3;
             // item_2.itemHeldCount = 0;
-            // item_2.itemStatus = true;
+            // item_2.itemUseCount = 0;
             item_2.itemWeight = 15;
             item_2.itemVolume = 8;
          var item_3 = new UsefulItem();
@@ -153,7 +153,7 @@
             item_3.itemName = "Goldfinger DVD";
             item_3.itemLocale = 1;
             // item_3.itemHeldCount = 0;
-            // item_3.itemStatus = true;
+            // item_3.itemUseCount = 0;
             item_3.itemWeight = 3;
             item_3.itemVolume = 3;
          var item_4 = new UsefulItem();
@@ -161,7 +161,7 @@
             item_4.itemName = "Yoga Pants";
             item_4.itemLocale = 3;
             // item_4.itemHeldCount = 0;
-            // item_4.itemStatus = true;
+            // item_4.itemUseCount = 0;
             item_4.itemWeight = 5;
             item_4.itemVolume = 5;
          var item_5 = new UsefulItem();
@@ -169,7 +169,7 @@
             item_5.itemName = "Dodgeball Ball";
             item_5.itemLocale = 4;
             // item_5.itemHeldCount = 0;
-            // item_5.itemStatus = true;
+            // item_5.itemUseCount = 0;
             item_5.itemWeight = 10;
             item_5.itemVolume = 30;
          var item_6 = new UsefulItem();
@@ -177,7 +177,7 @@
             item_6.itemName = "Compass";
             item_6.itemLocale = 2;
             // item_6.itemHeldCount = 0;
-            // item_6.itemStatus = true;
+            // item_6.itemUseCount = 0;
             item_6.itemWeight = 3;
             item_6.itemVolume = 3;
          var item_7 = new UsefulItem();
@@ -185,7 +185,7 @@
             item_7.itemName = "Lotion";
             item_7.itemLocale = 3;
             // item_7.itemHeldCount = 0;
-            // item_7.itemStatus = true;
+            // item_7.itemUseCount = 0;
             item_7.itemWeight = 8;
             item_7.itemVolume = 8;
 
