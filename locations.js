@@ -65,7 +65,7 @@
          // Update previousLocale as appropriate.
          // Update currentLocale as appropriate.
          // Update 'message' for game response in historyTextArea,
-         // Increment localeVisits as appropriate.
+         // Increment localeVisitCount as appropriate.
          // Add newVisitPoints value for first visit to MapLocale.
          // Subtract increasing points each time returning to a MapLocale.
          // Subtract navAttemptFailPoints each time a navigation attempt is denied.
@@ -81,15 +81,15 @@
             currentLocale = navArray[currentLocale][navAttempt];
             // Copy updated LocaleDesc to 'message' for game response.
             message = this.localeArray[currentLocale].localeDesc;
-            // Increment updated (new) current localeVisits by one.
-            localeArray[currentLocale].localeVisits++;
+            // Increment updated (new) current localeVisitCount by one.
+            localeArray[currentLocale].localeVisitCount++;
             // Add newVisitPoints value for first visit to MapLocale.
-            if (localeArray[currentLocale].localeVisits === 1) {
+            if (localeArray[currentLocale].localeVisitCount === 1) {
                totalScore = totalScore + firstVisitPoints;
             }  else {
             // Subtract increasing points each time player returns to a MapLocale.
-               // Use localeVisits + 1 so player does not lose a point for the initial visit.
-               totalScore = totalScore - localeArray[currentLocale].localeVisits + 1;
+               // Use localeVisitCount + 1 so player does not lose a point for the initial visit.
+               totalScore = totalScore - localeArray[currentLocale].localeVisitCount + 1;
                }
          }  else {
          // If attempted direction is not valid...
@@ -112,15 +112,15 @@
             currentLocale = 5;
             // Copy updated LocaleDesc to 'message' for game response.
             message = this.localeArray[currentLocale].localeDesc;
-            // Increment updated (new) current localeVisits by one.
-            localeArray[currentLocale].localeVisits++;
+            // Increment updated (new) current localeVisitCount by one.
+            localeArray[currentLocale].localeVisitCount++;
             // Add newVisitPoints value for first visit to MapLocale.
-            if (localeArray[currentLocale].localeVisits === 1) {
+            if (localeArray[currentLocale].localeVisitCount === 1) {
                totalScore = totalScore + firstVisitPoints;
             }  else {
             // Subtract increasing points each time player returns to a MapLocale.
-               // Use localeVisits + 1 so player does not lose a point for the initial visit.
-               totalScore = totalScore - localeArray[currentLocale].localeVisits + 1;
+               // Use localeVisitCount + 1 so player does not lose a point for the initial visit.
+               totalScore = totalScore - localeArray[currentLocale].localeVisitCount + 1;
                }
             // Pass playerAction and message downstream.
             updateAllDisplays(playerAction, message);
